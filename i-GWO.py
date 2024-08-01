@@ -20,9 +20,12 @@ def fitness(individual):
 class i_GWO:
     def __init__(self, iterations, wolf_size, vector_size, min_range, max_range):
         """
+
         :param iterations: 最大迭代次数
         :param wolf_size: 灰狼个数
         :param vector_size: 灰狼个体维度
+        :param min_range: 最小边界
+        :param max_range: 最大边界
         """
         self.iterations = iterations
         self.wolf_size = wolf_size
@@ -34,14 +37,11 @@ class i_GWO:
     def gen_wolf_pack(self):
         """
         初始化灰狼种群
-        :param min_range:最小边界
-        :param max_range:最大边界
-        :return:灰狼种群
         """
         min_range, max_range = self.min_range, self.max_range
         # 边界
         search_space = np.vstack((min_range, max_range))
-        print(search_space)
+        # print(search_space)
         # 种群初始化
         size = self.vector_size
         N = self.wolf_size
@@ -66,7 +66,6 @@ class i_GWO:
         for k in range(self.iterations):
             # select alpha, beta and delta
             alpha, beta, delta = pack_fit[0][1], pack_fit[1][1], pack_fit[2][1]
-
             print('iteration: {}, best_wolf_position: {}'.format(k, fitness(alpha)))
 
             # linearly decreased from 2 to 0
